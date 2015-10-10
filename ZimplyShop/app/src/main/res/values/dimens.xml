@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MARGINS -->
+    <dimen name="z_margin_supermini">2dp</dimen>
+    <dimen name="z_margin_mini">4dp</dimen>
+    <dimen name="z_margin_small">8dp</dimen>
+    <dimen name="z_margin_medium">12dp</dimen>
+    <dimen name="z_margin_large">16dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="z_font_supermini">10sp</dimen>
+    <dimen name="z_font_mini">12sp</dimen>
+    <dimen name="z_font_small">14sp</dimen>
+    <dimen name="z_font_medium">16sp</dimen>
+    <dimen name="z_font_large">18sp</dimen>
+
+    <!-- Material Design Dimens -->
+    <dimen name="z_toolbar_height">56dp</dimen>
+    <dimen name="z_button_height">48dp</dimen>
+
+    <!-- App dimens-->
+    <dimen name="z_drawer_header_top_padding">56dp</dimen>
+    <dimen name="z_drawer_profile_image_height">64dp</dimen>
+    <dimen name="z_margin_top_108">108dp</dimen>
+    <dimen name="z_margin_top_104">104dp</dimen>
+    <dimen name="z_swipe_refresh_start_pos">90dp</dimen>
+    <dimen name="z_swipe_refresh_rest_pos">130dp</dimen>
+
+    <!--Product description activity-->
+    <dimen name="z_product_rating_product_image_height">80dp</dimen>
+    <dimen name="z_product_rating_user_image_radius">55dp</dimen>
+</resources>

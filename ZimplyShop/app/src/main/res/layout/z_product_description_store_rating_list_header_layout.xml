@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/storeheader"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/z_white_color"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/z_margin_large">
+
+            <ImageView
+                android:layout_width="@dimen/z_product_rating_product_image_height"
+                android:layout_height="@dimen/z_product_rating_product_image_height"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample_cushion"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/z_margin_medium"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/z_margin_mini"
+                    android:singleLine="true"
+                    android:text="Jin Yan Accessrories Limited"
+                    android:textColor="@color/z_text_color_dark"
+                    android:textSize="@dimen/z_font_medium"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/z_margin_small"
+                    android:singleLine="true"
+                    android:text="Visit Store"
+                    android:textColor="@color/z_swipe_refresh_color_1"
+                    android:textSize="@dimen/z_font_mini"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/z_margin_small"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <RatingBar
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:rating="3"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/z_margin_mini"
+                        android:singleLine="true"
+                        android:text="(295 ratings)"
+                        android:textColor="@color/z_text_color_medium_dark"
+                        android:textSize="@dimen/z_font_mini"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/z_grey_shade_3"/>
+    </LinearLayout>
+
+</FrameLayout>

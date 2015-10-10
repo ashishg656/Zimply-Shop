@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">Zimply Shop</string>
+    <string name="action_settings">Settings</string>
+    <string name="z_open_drawer">opendrawervalueconstatnt</string>
+    <string name="z_close_drawer">closedrawervaluecontant</string>
+
+    <string name="z_product_overview">Overview</string>
+    <string name="z_product_product_rating">Product Rating</string>
+    <string name="z_product_store_rating">Store Rating</string>
+
+    <string-array name="z_product_description_tab_array">
+        <item>@string/z_product_overview</item>
+        <item>@string/z_product_product_rating</item>
+        <item>@string/z_product_store_rating</item>
+    </string-array>
+
+</resources>

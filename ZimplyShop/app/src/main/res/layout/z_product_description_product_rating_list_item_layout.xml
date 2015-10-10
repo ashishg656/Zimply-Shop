@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/z_white_color"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/z_margin_large"
+            android:paddingLeft="@dimen/z_margin_mini"
+            android:paddingRight="@dimen/z_margin_large"
+            android:paddingTop="@dimen/z_margin_mini">
+
+            <com.zimplyshop.app.widgets.CircularImageView
+                android:layout_width="@dimen/z_product_rating_user_image_radius"
+                android:layout_height="@dimen/z_product_rating_user_image_radius"
+                android:layout_marginLeft="@dimen/z_margin_mini"
+                android:layout_marginTop="@dimen/z_margin_mini"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_test_user"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/z_margin_small"
+                android:layout_marginTop="@dimen/z_margin_medium"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="Novie Simon"
+                            android:textColor="@color/z_text_color_dark"
+                            android:textSize="@dimen/z_font_small"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/z_margin_mini"
+                            android:singleLine="true"
+                            android:text="10 hours ago"
+                            android:textColor="@color/z_text_color_light"
+                            android:textSize="@dimen/z_font_supermini"/>
+                    </LinearLayout>
+
+                    <RatingBar
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:rating="3"/>
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/z_margin_small"
+                    android:text="A piece of cheap plastic and offers in app purchase its a useless product i returned it.I loved it but got it."
+                    android:textColor="@color/z_text_color_medium_dark"
+                    android:textSize="@dimen/z_font_small"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/z_grey_shade_3"/>
+    </LinearLayout>
+
+</FrameLayout>

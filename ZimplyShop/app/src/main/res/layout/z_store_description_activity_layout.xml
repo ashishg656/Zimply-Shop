@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/z_white_color">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/homeproductfragmentrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/z_margin_small"
+        android:paddingLeft="@dimen/z_margin_mini"
+        android:paddingRight="@dimen/z_margin_mini"
+        android:paddingTop="@dimen/z_toolbar_height"
+        android:scrollbars="none"/>
+
+    <include layout="@layout/z_toolbar_layout"/>
+</FrameLayout>
