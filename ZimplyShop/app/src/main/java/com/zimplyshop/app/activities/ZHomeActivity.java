@@ -2,6 +2,7 @@ package com.zimplyshop.app.activities;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
@@ -16,16 +17,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Toast;
 
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.baseobjects.ZHomeViewPagerTabsObject;
 import com.zimplyshop.app.extras.ZAnimatorListener;
+import com.zimplyshop.app.extras.ZAppConstants;
 import com.zimplyshop.app.fragments.ZHomeProductListFragment;
 
 /**
  * Created by praveen goel on 10/6/2015.
  */
-public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChangeListener {
+public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChangeListener, ZAppConstants {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -198,5 +201,14 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
                 isToolbarAnimRunning = false;
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Z_ADD_TO_WISHLIST_START_ACTIVITY_FOR_RESULT_REQUEST && resultCode == RESULT_OK) {
+            int wishlistBookID = data.getExtras().getInt("wishlist_product_id");
+            Toast.makeText(this, "Id was " + wishlistBookID, Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -20,7 +20,7 @@
 
     <!-- Text colors-->
     <color name="z_text_color_medium_dark">@color/z_grey_shade_7</color>
-    <color name="z_text_color_dark">@color/z_grey_shade_8</color>
+    <color name="z_text_color_dark">@color/z_grey_shade_9</color>
     <color name="z_text_color_light">@color/z_grey_shade_5</color>
 
     <!--App specific -->
@@ -30,4 +30,11 @@
     <color name="z_swipe_refresh_color_1">#4490c7</color>
     <color name="z_swipe_refresh_color_2">#2e7d32</color>
     <color name="z_swipe_refresh_color_3">#e53935</color>
+    <color name="z_addtocart_button_bg">#009dc8</color>
+    <color name="z_buynow_button_bg">#00c750</color>
+    <color name="z_green_color_primary">#2e7d32</color>
+
+    <!--Google login button colors-->
+    <color name="google_login_normal">#dd4b39</color>
+    <color name="google_login_pressed">#f24c36</color>
 </resources>

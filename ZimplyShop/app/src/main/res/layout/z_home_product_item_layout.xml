@@ -60,6 +60,7 @@
                 android:orientation="horizontal">
 
                 <FrameLayout
+                    android:id="@+id/addtowishlist"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -91,6 +92,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/addtocartlayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -39,5 +39,6 @@ public class ZSplashActivity extends ZBaseActivity {
         Intent intent = new Intent(this, ZHomeActivity.class);
         intent.putExtra("tabs_object", obj);
         startActivity(intent);
+        this.finish();
     }
 }

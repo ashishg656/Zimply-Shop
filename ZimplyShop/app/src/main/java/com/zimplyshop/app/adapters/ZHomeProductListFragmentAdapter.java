@@ -13,15 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zimplyshop.app.R;
+import com.zimplyshop.app.activities.ZBaseActivity;
+import com.zimplyshop.app.activities.ZHomeActivity;
+import com.zimplyshop.app.activities.ZLoginActivity;
 import com.zimplyshop.app.activities.ZProductDescriptionActivity;
 import com.zimplyshop.app.baseobjects.ZProductListObject;
+import com.zimplyshop.app.extras.ZAppConstants;
+import com.zimplyshop.app.preferences.ZPreferences;
 
 import java.util.List;
 
 /**
  * Created by praveen goel on 10/6/2015.
  */
-public class ZHomeProductListFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ZHomeProductListFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ZAppConstants {
 
     Context context;
     List<ZProductListObject.ZProductObject> mData;
@@ -51,8 +56,14 @@ public class ZHomeProductListFragmentAdapter extends RecyclerView.Adapter<Recycl
 
         holder.mrp.setPaintFlags(holder.mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        holder.mainContainer.setTag(position);
+        holder.mainContainer.setTag(holder);
         holder.mainContainer.setOnClickListener(clickListener);
+
+        holder.wishlistLayout.setTag(holder);
+        holder.wishlistLayout.setOnClickListener(clickListener);
+
+        holder.cartLayout.setTag(holder);
+        holder.cartLayout.setOnClickListener(clickListener);
     }
 
     @Override
@@ -64,13 +75,15 @@ public class ZHomeProductListFragmentAdapter extends RecyclerView.Adapter<Recycl
 
         ImageView productImage;
         TextView mrp;
-        FrameLayout mainContainer;
+        FrameLayout mainContainer, wishlistLayout, cartLayout;
 
         public ZProductHolder(View v) {
             super(v);
             productImage = (ImageView) v.findViewById(R.id.productimage);
             mrp = (TextView) v.findViewById(R.id.mrptextproduct);
             mainContainer = (FrameLayout) v.findViewById(R.id.prodyctconatunre);
+            wishlistLayout = (FrameLayout) v.findViewById(R.id.addtowishlist);
+            cartLayout = (FrameLayout) v.findViewById(R.id.addtocartlayout);
         }
     }
 
@@ -81,9 +94,24 @@ public class ZHomeProductListFragmentAdapter extends RecyclerView.Adapter<Recycl
             switch (v.getId()) {
                 case R.id.prodyctconatunre:
                     Intent i = new Intent(context, ZProductDescriptionActivity.class);
-                    int pos = (int) v.getTag();
+                    ZProductHolder holder = (ZProductHolder) v.getTag();
+                    int pos = holder.getAdapterPosition();
                     i.putExtra("product_id", mData.get(pos).getId());
                     context.startActivity(i);
+                    break;
+                case R.id.addtowishlist:
+                    holder = (ZProductHolder) v.getTag();
+                    pos = holder.getAdapterPosition();
+                    if (ZPreferences.isUserLogin(context)) {
+
+                    } else {
+                        i = new Intent(context, ZLoginActivity.class);
+                        i.putExtra("wishlist_product_id", mData.get(pos).getId());
+                        ((ZHomeActivity) context).startActivityForResult(i, Z_ADD_TO_WISHLIST_START_ACTIVITY_FOR_RESULT_REQUEST);
+                    }
+                    break;
+                case R.id.addtocartlayout:
+                    ((ZBaseActivity) context).openCartActivity();
                     break;
             }
         }

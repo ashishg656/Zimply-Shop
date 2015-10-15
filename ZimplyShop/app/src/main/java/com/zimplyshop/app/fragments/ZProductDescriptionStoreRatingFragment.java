@@ -23,6 +23,12 @@ public class ZProductDescriptionStoreRatingFragment extends ZBaseFragment {
     LinearLayoutManager layoutManager;
     ZProductDescriptionStoreRatingListAdapter adapter;
 
+    public static ZProductDescriptionStoreRatingFragment newInstance(Bundle b) {
+        ZProductDescriptionStoreRatingFragment frg = new ZProductDescriptionStoreRatingFragment();
+        frg.setArguments(b);
+        return frg;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.z_product_description_product_rating_fragment_layout, container, false);
@@ -39,6 +45,12 @@ public class ZProductDescriptionStoreRatingFragment extends ZBaseFragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+
+        try {
+            getArguments().getInt("opened_from_store_rating_activity");
+            recyclerView.setPadding(0, 0, 0, getActivity().getResources().getDimensionPixelSize(R.dimen.z_margin_small));
+        } catch (Exception e) {
+        }
 
         addData();
     }

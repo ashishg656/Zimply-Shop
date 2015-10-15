@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.activities.ZProductDescriptionActivity;
+import com.zimplyshop.app.activities.ZStoreRatingActivity;
 import com.zimplyshop.app.baseobjects.ZProductListObject;
 import com.zimplyshop.app.baseobjects.ZStoreDescriptionObject;
 import com.zimplyshop.app.extras.ZAppConstants;
@@ -64,7 +65,8 @@ public class ZStoreDescriptionListAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holderCom, int position) {
         if (getItemViewType(position) == Z_PRODUCT_DESCRIPTION_PRODUCT_RATING_LIST_TYPE_HEADER) {
-
+            StoreDescriptionHeaderHolder holder = (StoreDescriptionHeaderHolder) holderCom;
+            holder.containerLayout.setOnClickListener(clickListener);
         } else if (getItemViewType(position) == Z_PRODUCT_DESCRIPTION_PRODUCT_RATING_LIST_TYPE_ITEM) {
             StoreDescriptionItemHolder holder = (StoreDescriptionItemHolder) holderCom;
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.productImage.getLayoutParams();
@@ -73,7 +75,7 @@ public class ZStoreDescriptionListAdapter extends RecyclerView.Adapter<RecyclerV
 
             holder.mrp.setPaintFlags(holder.mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            holder.mainContainer.setTag(position);
+            holder.mainContainer.setTag(holder);
             holder.mainContainer.setOnClickListener(clickListener);
         }
     }
@@ -85,8 +87,11 @@ public class ZStoreDescriptionListAdapter extends RecyclerView.Adapter<RecyclerV
 
     class StoreDescriptionHeaderHolder extends RecyclerView.ViewHolder {
 
+        FrameLayout containerLayout;
+
         public StoreDescriptionHeaderHolder(View v) {
             super(v);
+            containerLayout = (FrameLayout) v.findViewById(R.id.storedescheader);
         }
     }
 
@@ -111,10 +116,14 @@ public class ZStoreDescriptionListAdapter extends RecyclerView.Adapter<RecyclerV
             switch (v.getId()) {
                 case R.id.prodyctconatunre:
                     Intent i = new Intent(context, ZProductDescriptionActivity.class);
-                    int pos = (int) v.getTag();
+                    StoreDescriptionItemHolder holder = (StoreDescriptionItemHolder) v.getTag();
+                    int pos = holder.getAdapterPosition();
                     i.putExtra("product_id", products.get(pos - 1).getId());
                     context.startActivity(i);
                     break;
+                case R.id.storedescheader:
+                    i = new Intent(context, ZStoreRatingActivity.class);
+                    context.startActivity(i);
             }
         }
     }
