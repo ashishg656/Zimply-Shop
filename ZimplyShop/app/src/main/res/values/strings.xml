@@ -18,5 +18,6 @@
     <string name="z_buynow_text">Buy Now</string>
     <string name="z_addtocart_text">Add To Cart</string>
     <string name="z_gotocart_text">Go To Cart</string>
+    <string name="z_wishlist_text">Wishlist</string>
 
 </resources>

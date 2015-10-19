@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,5 +9,41 @@
         android:id="@+id/listaddresslist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@null"/>
-</LinearLayout>
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:paddingBottom="@dimen/z_toolbar_height"/>
+
+    <FrameLayout
+        android:id="@+id/selectaddressbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/z_blue_color"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/z_margin_large">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="SELECT ADDRESS"
+                android:textColor="@color/z_white_color"
+                android:textSize="@dimen/z_font_medium"/>
+
+            <ImageView
+                android:layout_width="@dimen/z_margin_medium"
+                android:layout_height="@dimen/z_margin_medium"
+                android:layout_marginLeft="@dimen/z_margin_medium"
+                android:layout_marginRight="@dimen/z_margin_small"
+                android:src="@drawable/ic_hardware_right_white"/>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

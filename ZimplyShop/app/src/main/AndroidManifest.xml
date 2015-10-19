@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="com.zimplyshop.app"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zimplyshop.app">
 
     <application
         android:name=".application.ZApplication"
@@ -14,46 +13,51 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.ZHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ZNoActionBarThemeTransparentStatusBar"/>
+            android:theme="@style/ZNoActionBarThemeTransparentStatusBar" />
         <activity
             android:name=".activities.ZProductDescriptionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ZNoActionBar"/>
+            android:theme="@style/ZNoActionBar" />
         <activity
             android:name=".activities.ZStoreDescriptionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ZNoActionBar"/>
+            android:theme="@style/ZNoActionBar" />
         <activity
             android:name=".activities.ZLoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ZNoActionBar"/>
+            android:theme="@style/ZNoActionBar" />
         <activity
             android:name=".activities.ZStoreRatingActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ZNoActionBar"/>
+            android:theme="@style/ZNoActionBar" />
         <activity
             android:name=".activities.ZCartActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ZNoActionBar"/>
+            android:theme="@style/ZNoActionBar" />
         <activity
             android:name=".activities.ZDeliveryAddressActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ZNoActionBar"/>
+            android:theme="@style/ZNoActionBar" />
+        <activity
+            android:name=".activities.ZWishlistActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/ZNoActionBar" />
     </application>
 
 </manifest>

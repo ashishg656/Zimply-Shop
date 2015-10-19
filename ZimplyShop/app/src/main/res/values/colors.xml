@@ -33,8 +33,10 @@
     <color name="z_addtocart_button_bg">#009dc8</color>
     <color name="z_buynow_button_bg">#00c750</color>
     <color name="z_green_color_primary">#2e7d32</color>
+    <color name="z_black_40_alpha">#80000000</color>
 
     <!--Google login button colors-->
     <color name="google_login_normal">#dd4b39</color>
     <color name="google_login_pressed">#f24c36</color>
+
 </resources>

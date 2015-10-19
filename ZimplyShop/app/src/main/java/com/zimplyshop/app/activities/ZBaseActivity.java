@@ -22,4 +22,9 @@ public class ZBaseActivity extends AppCompatActivity {
         Intent i = new Intent(this, ZCartActivity.class);
         startActivity(i);
     }
+
+    public void openWishlistActivity() {
+        Intent i = new Intent(this, ZWishlistActivity.class);
+        startActivity(i);
+    }
 }

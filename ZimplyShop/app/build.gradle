@@ -45,7 +45,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient-android:4.3.5'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:design:22.2.1'
     // google play services
     compile 'com.google.android.gms:play-services-gcm:7.0.0'
     compile 'com.google.android.gms:play-services-identity:7.0.0'

@@ -14,6 +14,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
@@ -77,12 +79,33 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
         zHomeViewPagerTabsObject = getIntent().getParcelableExtra("tabs_object");
 
         setDrawerActionBarToggle();
+        setDrawerItemClickListener();
 
         viewPager.addOnPageChangeListener(this);
 
         pagerAdapter = new ZHomeActivityPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void setDrawerItemClickListener() {
+        navigationView
+                .setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                        item.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        switch (item.getItemId()) {
+                            case R.id.wishlist_navdrawer:
+                                openWishlistActivity();
+                                return true;
+
+                            default:
+                                return true;
+                        }
+                    }
+                });
     }
 
     private void setDrawerActionBarToggle() {
@@ -210,5 +233,27 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
             int wishlistBookID = data.getExtras().getInt("wishlist_product_id");
             Toast.makeText(this, "Id was " + wishlistBookID, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.z_home_activity_toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_cart) {
+            openCartActivity();
+            return true;
+        } else if (id == R.id.action_search) {
+
+            return true;
+        } else if (id == R.id.action_filter) {
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

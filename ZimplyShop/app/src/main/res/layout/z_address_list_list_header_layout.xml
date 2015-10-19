@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/z_margin_small"
-    android:layout_marginTop="@dimen/z_margin_small"
     android:gravity="center"
     android:orientation="horizontal"
+    android:paddingBottom="@dimen/z_margin_large"
     android:paddingLeft="@dimen/z_margin_small"
-    android:paddingRight="@dimen/z_margin_small">
+    android:paddingRight="@dimen/z_margin_small"
+    android:paddingTop="@dimen/z_margin_large">
 
     <ImageView
         android:layout_width="@dimen/z_margin_large"
@@ -30,6 +30,7 @@
         android:background="@color/z_green_color_primary">
 
         <TextView
+            android:id="@+id/addaddresbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"

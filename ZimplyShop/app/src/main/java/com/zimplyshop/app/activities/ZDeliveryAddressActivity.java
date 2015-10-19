@@ -8,6 +8,7 @@ import com.zimplyshop.app.baseobjects.ZAddressListingObject;
 import com.zimplyshop.app.baseobjects.ZAddressSingleAddressObject;
 import com.zimplyshop.app.fragments.ZAddAddressFragment;
 import com.zimplyshop.app.fragments.ZAddressListFragment;
+import com.zimplyshop.app.fragments.ZConfirmAddressFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,26 +33,36 @@ public class ZDeliveryAddressActivity extends ZBaseActivity {
         addData();
 
         if (addressObject.getAddress().size() == 0) {
-            setAddAddressFragment();
+            setAddAddressFragment(false);
         } else {
-            setSelectAddressFragment();
+            setConfirmAddressFragment();
         }
+    }
+
+    public void setConfirmAddressFragment() {
+        Bundle b = new Bundle();
+        b.putParcelable("addresslist", addressObject);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZConfirmAddressFragment.newInstance(b)).commit();
     }
 
     public void setSelectAddressFragment() {
         Bundle b = new Bundle();
         b.putParcelable("addresslist", addressObject);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZAddressListFragment.newInstance(b)).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZAddressListFragment.newInstance(b)).addToBackStack("select").commit();
     }
 
-    public void setAddAddressFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZAddAddressFragment.newInstance(new Bundle())).commit();
+    public void setAddAddressFragment(boolean addToBackStack) {
+        if (!addToBackStack) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZAddAddressFragment.newInstance(new Bundle())).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZAddAddressFragment.newInstance(new Bundle())).addToBackStack("add").commit();
+        }
     }
 
     public void setEditAddressFragment(ZAddressSingleAddressObject obj) {
         Bundle b = new Bundle();
         b.putParcelable("addressobject", obj);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZAddAddressFragment.newInstance(b)).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentholder, ZAddAddressFragment.newInstance(b)).addToBackStack("edit").commit();
     }
 
     private void addData() {
