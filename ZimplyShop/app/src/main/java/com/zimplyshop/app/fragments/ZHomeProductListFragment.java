@@ -24,8 +24,8 @@ import java.util.TimerTask;
  */
 public class ZHomeProductListFragment extends ZBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    RecyclerView recyclerView;
-    GridLayoutManager layoutManager;
+    public RecyclerView recyclerView;
+    public GridLayoutManager layoutManager;
     ZHomeProductListFragmentAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
 

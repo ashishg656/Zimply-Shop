@@ -1,7 +1,6 @@
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -21,7 +20,7 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager_launch"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/appbarlayout"
@@ -44,7 +43,7 @@
                         android:paddingTop="0dp"
                         android:text="Zimply"
                         android:textColor="@color/z_text_color_medium_dark"
-                        android:textSize="22sp"/>
+                        android:textSize="22sp" />
                 </android.support.v7.widget.Toolbar>
 
                 <android.support.design.widget.TabLayout
@@ -54,14 +53,73 @@
                     app:tabIndicatorColor="@color/z_blue_color"
                     app:tabMode="scrollable"
                     app:tabSelectedTextColor="@color/z_blue_color"
-                    app:tabTextColor="@color/pager_tab_normal_color"/>
+                    app:tabTextColor="@color/pager_tab_normal_color" />
             </android.support.design.widget.AppBarLayout>
         </FrameLayout>
 
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/cordinatorhome"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
+
+        <io.codetail.widget.RevealFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/searchlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/z_grey_shade_2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/z_toolbar_height"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/searchbackbutton"
+                        android:layout_width="@dimen/z_toolbar_height"
+                        android:layout_height="@dimen/z_toolbar_height"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="@dimen/z_margin_large"
+                            android:layout_height="@dimen/z_margin_large"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_navigation_arrow_back" />
+                    </FrameLayout>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/z_margin_small"
+                        android:layout_marginRight="@dimen/z_margin_small"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="Search.."
+                        android:singleLine="true"
+                        android:textColor="@color/z_text_color_dark"
+                        android:textColorHint="@color/z_text_color_medium_dark" />
+
+                    <FrameLayout
+                        android:layout_width="@dimen/z_toolbar_height"
+                        android:layout_height="@dimen/z_toolbar_height"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="@dimen/z_margin_large"
+                            android:layout_height="@dimen/z_margin_large"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_navigation_arrow_back" />
+                    </FrameLayout>
+                </LinearLayout>
+            </android.support.design.widget.AppBarLayout>
+        </io.codetail.widget.RevealFrameLayout>
     </FrameLayout>
 
     <android.support.design.widget.NavigationView
@@ -73,6 +131,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/z_navigation_drawer_header_layout"
         app:itemBackground="@null"
-        app:menu="@menu/z_drawer_items_menu"/>
+        app:menu="@menu/z_drawer_items_menu" />
 
 </android.support.v4.widget.DrawerLayout>

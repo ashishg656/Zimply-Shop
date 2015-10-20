@@ -18,7 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.zimplyshop.app.R;
@@ -27,10 +29,15 @@ import com.zimplyshop.app.extras.ZAnimatorListener;
 import com.zimplyshop.app.extras.ZAppConstants;
 import com.zimplyshop.app.fragments.ZHomeProductListFragment;
 
+import java.util.HashMap;
+
+import io.codetail.animation.SupportAnimator;
+import io.codetail.animation.ViewAnimationUtils;
+
 /**
  * Created by praveen goel on 10/6/2015.
  */
-public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChangeListener, ZAppConstants {
+public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChangeListener, ZAppConstants, View.OnClickListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -42,10 +49,22 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
     public static final int TRANSLATION_DURATION = 200;
     boolean isToolbarAnimRunning;
 
+    AppBarLayout searchBarLayout;
+    HashMap<Integer, Fragment> fragmentHashMap;
+    int materialButtonHeight;
+    int searchButtonCenterX, searchButtonCenterY;
+    int deviceWidth;
+    int searchAnimDuration = 400;
+    FrameLayout searchBarBackButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.z_home_activity_layout);
+
+        fragmentHashMap = new HashMap<>();
+        materialButtonHeight = getResources().getDimensionPixelSize(R.dimen.z_button_height);
+        deviceWidth = getResources().getDisplayMetrics().widthPixels;
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -53,6 +72,12 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
         tabLayout = (TabLayout) findViewById(R.id.indicator);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        searchBarLayout = (AppBarLayout) findViewById(R.id.searchlayout);
+        searchBarBackButton = (FrameLayout) findViewById(R.id.searchbackbutton);
+
+        searchBarBackButton.setOnClickListener(this);
+
+        searchBarLayout.setVisibility(View.GONE);
 
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources()
@@ -145,6 +170,13 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
 
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.searchbackbutton) {
+            onBackPressed();
+        }
+    }
+
     class ZHomeActivityPagerAdapter extends FragmentPagerAdapter {
 
         public ZHomeActivityPagerAdapter(FragmentManager fm) {
@@ -160,7 +192,10 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
             bundle.putString("page_id", zHomeViewPagerTabsObject.getViewPagerItems().get(position).getId());
-            return ZHomeProductListFragment.newInstance(bundle);
+
+            Fragment fragment = ZHomeProductListFragment.newInstance(bundle);
+            fragmentHashMap.put(position, fragment);
+            return fragmentHashMap.get(position);
         }
 
         @Override
@@ -248,12 +283,82 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
             openCartActivity();
             return true;
         } else if (id == R.id.action_search) {
-
+            showSearchBarLayout();
             return true;
         } else if (id == R.id.action_filter) {
 
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showSearchBarLayout() {
+        if (searchButtonCenterY == 0) {
+            int loc[] = new int[2];
+            findViewById(R.id.action_search).getLocationInWindow(loc);
+            searchButtonCenterY = loc[1] + findViewById(R.id.action_search).getHeight() / 4;
+            searchButtonCenterX = loc[0] + findViewById(R.id.action_search).getWidth() / 2;
+        }
+
+        searchBarLayout.setVisibility(View.VISIBLE);
+
+        SupportAnimator animator =
+                ViewAnimationUtils.createCircularReveal(searchBarLayout, searchButtonCenterX, searchButtonCenterY, 0, deviceWidth);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setDuration(searchAnimDuration);
+        animator.start();
+
+        appBarLayout.setVisibility(View.GONE);
+        for (int i = 0; i < fragmentHashMap.size(); i++) {
+            if (fragmentHashMap.get(i) != null) {
+                ((ZHomeProductListFragment) fragmentHashMap.get(i)).recyclerView.scrollBy(0, materialButtonHeight);
+            }
+        }
+    }
+
+    void hideSearchBarLayout() {
+        appBarLayout.setVisibility(View.VISIBLE);
+
+        SupportAnimator animator =
+                ViewAnimationUtils.createCircularReveal(searchBarLayout, searchButtonCenterX, searchButtonCenterY, deviceWidth, 0);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setDuration(searchAnimDuration);
+        animator.addListener(new SupportAnimator.AnimatorListener() {
+            @Override
+            public void onAnimationStart() {
+
+            }
+
+            @Override
+            public void onAnimationEnd() {
+                searchBarLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel() {
+                searchBarLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat() {
+
+            }
+        });
+        animator.start();
+
+        for (int i = 0; i < fragmentHashMap.size(); i++) {
+            if (fragmentHashMap.get(i) != null) {
+                ((ZHomeProductListFragment) fragmentHashMap.get(i)).recyclerView.scrollBy(0, -materialButtonHeight);
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (searchBarLayout.getVisibility() == View.VISIBLE) {
+            hideSearchBarLayout();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
