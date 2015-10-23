@@ -2,6 +2,7 @@ package com.zimplyshop.app.activities;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -14,13 +15,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.zimplyshop.app.R;
@@ -49,13 +55,14 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
     public static final int TRANSLATION_DURATION = 200;
     boolean isToolbarAnimRunning;
 
-    AppBarLayout searchBarLayout;
+    LinearLayout searchBarLayout;
     HashMap<Integer, Fragment> fragmentHashMap;
     int materialButtonHeight;
     int searchButtonCenterX, searchButtonCenterY;
     int deviceWidth;
-    int searchAnimDuration = 400;
-    FrameLayout searchBarBackButton;
+    int searchAnimDuration = 300;
+    FrameLayout searchBarBackButton, searchClearButton;
+    EditText searchEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +79,33 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
         tabLayout = (TabLayout) findViewById(R.id.indicator);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        searchBarLayout = (AppBarLayout) findViewById(R.id.searchlayout);
+        searchBarLayout = (LinearLayout) findViewById(R.id.searchlayout);
         searchBarBackButton = (FrameLayout) findViewById(R.id.searchbackbutton);
+        searchClearButton = (FrameLayout) findViewById(R.id.crossbuttonhome);
+        searchEditText = (EditText) findViewById(R.id.searchtexthomeactivity);
 
         searchBarBackButton.setOnClickListener(this);
+        searchClearButton.setOnClickListener(this);
 
         searchBarLayout.setVisibility(View.GONE);
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    searchClearButton.setVisibility(View.INVISIBLE);
+                } else {
+                    searchClearButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources()
@@ -174,6 +202,9 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
     public void onClick(View v) {
         if (v.getId() == R.id.searchbackbutton) {
             onBackPressed();
+        } else if (v.getId() == R.id.crossbuttonhome) {
+            searchEditText.setText("");
+            searchClearButton.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -296,11 +327,17 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
         if (searchButtonCenterY == 0) {
             int loc[] = new int[2];
             findViewById(R.id.action_search).getLocationInWindow(loc);
-            searchButtonCenterY = loc[1] + findViewById(R.id.action_search).getHeight() / 4;
+            searchButtonCenterY = loc[1];
             searchButtonCenterX = loc[0] + findViewById(R.id.action_search).getWidth() / 2;
         }
 
         searchBarLayout.setVisibility(View.VISIBLE);
+        searchClearButton.setVisibility(View.INVISIBLE);
+        searchEditText.setText("");
+
+        searchEditText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
 
         SupportAnimator animator =
                 ViewAnimationUtils.createCircularReveal(searchBarLayout, searchButtonCenterX, searchButtonCenterY, 0, deviceWidth);
@@ -318,6 +355,10 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
 
     void hideSearchBarLayout() {
         appBarLayout.setVisibility(View.VISIBLE);
+
+        searchEditText.clearFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
 
         SupportAnimator animator =
                 ViewAnimationUtils.createCircularReveal(searchBarLayout, searchButtonCenterX, searchButtonCenterY, deviceWidth, 0);

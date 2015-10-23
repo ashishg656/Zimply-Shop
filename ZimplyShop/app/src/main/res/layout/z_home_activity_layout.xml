@@ -66,59 +66,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.AppBarLayout
+
+            <LinearLayout
                 android:id="@+id/searchlayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/z_grey_shade_2"
-                android:orientation="vertical">
+                android:layout_height="@dimen/z_toolbar_height"
+                android:background="@drawable/searchbar_bg_shadow"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <FrameLayout
+                    android:id="@+id/searchbackbutton"
+                    android:layout_width="@dimen/z_toolbar_height"
                     android:layout_height="@dimen/z_toolbar_height"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground">
 
-                    <FrameLayout
-                        android:id="@+id/searchbackbutton"
-                        android:layout_width="@dimen/z_toolbar_height"
-                        android:layout_height="@dimen/z_toolbar_height"
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground">
+                    <ImageView
+                        android:layout_width="@dimen/z_margin_large"
+                        android:layout_height="@dimen/z_margin_large"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_navigation_arrow_back" />
+                </FrameLayout>
 
-                        <ImageView
-                            android:layout_width="@dimen/z_margin_large"
-                            android:layout_height="@dimen/z_margin_large"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_navigation_arrow_back" />
-                    </FrameLayout>
+                <EditText
+                    android:id="@+id/searchtexthomeactivity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/z_margin_small"
+                    android:layout_marginRight="@dimen/z_margin_small"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Search.."
+                    android:singleLine="true"
+                    android:textColor="@color/z_text_color_dark"
+                    android:textColorHint="@color/z_text_color_medium_dark" />
 
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/z_margin_small"
-                        android:layout_marginRight="@dimen/z_margin_small"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="Search.."
-                        android:singleLine="true"
-                        android:textColor="@color/z_text_color_dark"
-                        android:textColorHint="@color/z_text_color_medium_dark" />
+                <FrameLayout
+                    android:id="@+id/crossbuttonhome"
+                    android:layout_width="@dimen/z_toolbar_height"
+                    android:layout_height="@dimen/z_toolbar_height"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground">
 
-                    <FrameLayout
-                        android:layout_width="@dimen/z_toolbar_height"
-                        android:layout_height="@dimen/z_toolbar_height"
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground">
-
-                        <ImageView
-                            android:layout_width="@dimen/z_margin_large"
-                            android:layout_height="@dimen/z_margin_large"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_navigation_arrow_back" />
-                    </FrameLayout>
-                </LinearLayout>
-            </android.support.design.widget.AppBarLayout>
+                    <ImageView
+                        android:layout_width="@dimen/z_margin_large"
+                        android:layout_height="@dimen/z_margin_large"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_cross_button" />
+                </FrameLayout>
+            </LinearLayout>
         </io.codetail.widget.RevealFrameLayout>
     </FrameLayout>
 
