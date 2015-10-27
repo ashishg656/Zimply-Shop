@@ -12,4 +12,8 @@ public interface ZAppConstants {
 
     int Z_CART_LIST_TYPE_FOOTER = 1;
     int Z_CART_LIST_TYPE_PRODUCT = 2;
+
+    int Z_SHOP_MAPS_SHOP_FRAGMENT_LIST_HEADER = 0;
+    int Z_SHOP_MAPS_SHOP_FRAGMENT_LIST_ITEM = 1;
+    int Z_SHOP_MAPS_SHOP_FRAGMENT_LIST_LOADING = 2;
 }

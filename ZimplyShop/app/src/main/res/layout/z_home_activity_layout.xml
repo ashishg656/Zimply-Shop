@@ -55,6 +55,15 @@
                     app:tabSelectedTextColor="@color/z_blue_color"
                     app:tabTextColor="@color/pager_tab_normal_color" />
             </android.support.design.widget.AppBarLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="@dimen/z_margin_large"
+                android:src="@drawable/ic_edit"
+                app:fabSize="normal" />
         </FrameLayout>
 
         <android.support.design.widget.CoordinatorLayout

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -64,6 +65,8 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
     FrameLayout searchBarBackButton, searchClearButton;
     EditText searchEditText;
 
+    FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +86,11 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
         searchBarBackButton = (FrameLayout) findViewById(R.id.searchbackbutton);
         searchClearButton = (FrameLayout) findViewById(R.id.crossbuttonhome);
         searchEditText = (EditText) findViewById(R.id.searchtexthomeactivity);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_normal);
 
         searchBarBackButton.setOnClickListener(this);
         searchClearButton.setOnClickListener(this);
+        floatingActionButton.setOnClickListener(this);
 
         searchBarLayout.setVisibility(View.GONE);
         searchEditText.addTextChangedListener(new TextWatcher() {
@@ -205,6 +210,9 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
         } else if (v.getId() == R.id.crossbuttonhome) {
             searchEditText.setText("");
             searchClearButton.setVisibility(View.INVISIBLE);
+        } else if (v.getId() == R.id.fab_normal) {
+            Intent i = new Intent(this, ZShopMapsActivity.class);
+            startActivity(i);
         }
     }
 

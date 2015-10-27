@@ -33,4 +33,7 @@
     <!--Product description activity-->
     <dimen name="z_product_rating_product_image_height">80dp</dimen>
     <dimen name="z_product_rating_user_image_radius">55dp</dimen>
+
+    <!-- Shop By maps activity-->
+    <dimen name="z_shop_maps_list_header_height">200dp</dimen>
 </resources>
