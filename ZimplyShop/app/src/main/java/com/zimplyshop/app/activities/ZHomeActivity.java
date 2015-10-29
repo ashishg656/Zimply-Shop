@@ -35,6 +35,7 @@ import com.zimplyshop.app.baseobjects.ZHomeViewPagerTabsObject;
 import com.zimplyshop.app.extras.ZAnimatorListener;
 import com.zimplyshop.app.extras.ZAppConstants;
 import com.zimplyshop.app.fragments.ZHomeProductListFragment;
+import com.zimplyshop.app.widgets.ActivitySwitcher;
 
 import java.util.HashMap;
 
@@ -211,8 +212,16 @@ public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChan
             searchEditText.setText("");
             searchClearButton.setVisibility(View.INVISIBLE);
         } else if (v.getId() == R.id.fab_normal) {
-            Intent i = new Intent(this, ZShopMapsActivity.class);
-            startActivity(i);
+            final Intent i = new Intent(this, ZShopMapsActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            ActivitySwitcher.animationOut(findViewById(R.id.maincontainerhomeactivity),
+                    getWindowManager(),
+                    new ActivitySwitcher.AnimationFinishedListener() {
+                        @Override
+                        public void onAnimationFinished() {
+                            startActivity(i);
+                        }
+                    });
         }
     }
 

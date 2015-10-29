@@ -1,13 +1,17 @@
 package com.zimplyshop.app.activities;
 
 import android.animation.Animator;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.extras.ZAnimatorListener;
 import com.zimplyshop.app.fragments.ZShopMapsShopFragment;
+import com.zimplyshop.app.widgets.ActivitySwitcher;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,12 +40,36 @@ public class ZShopMapsActivity extends ZBaseActivity implements OnMapReadyCallba
     public int initialTopValueForBackgroundView = -1;
     private boolean isBackgroundViewAnimating;
 
+    int statusBarHeight;
+    View statusBarView;
+    LinearLayout toolbarBackground;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.z_shop_maps_activity);
 
+        statusBarView = (View) findViewById(R.id.viewforstatusbar);
+        toolbarBackground = (LinearLayout) findViewById(R.id.toolbarbackgroundvoew);
+
         deviceHeight = getResources().getDisplayMetrics().heightPixels;
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (checkIfLollipopOrGreater()) {
+            statusBarHeight = getStatusBarHeight();
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) statusBarView.getLayoutParams();
+            params.height = statusBarHeight;
+            statusBarView.setLayoutParams(params);
+        } else {
+            statusBarView.setVisibility(View.GONE);
+        }
+
+        statusBarView.setAlpha(0);
+        toolbarBackground.setAlpha(0);
+
+        toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
         viewPager = (ViewPager) findViewById(R.id.pager_launch);
         backgroundView = (View) findViewById(R.id.backgroundview);
@@ -62,10 +91,33 @@ public class ZShopMapsActivity extends ZBaseActivity implements OnMapReadyCallba
         viewPager.addOnPageChangeListener(this);
     }
 
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    boolean checkIfLollipopOrGreater() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            return true;
+        return false;
+    }
+
     @Override
     protected void onResume() {
+        ActivitySwitcher.animationIn(findViewById(R.id.shopactivitymapscontainer),
+                getWindowManager());
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.z_home_activity_toolbar_menu, menu);
+        return true;
     }
 
     private void setUpMapIfNeeded() {
@@ -128,12 +180,18 @@ public class ZShopMapsActivity extends ZBaseActivity implements OnMapReadyCallba
 
     public void setBackgroundViewTranslation(int trans) {
         backgroundView.setTranslationY(trans);
+        if (trans == 0) {
+            statusBarView.setAlpha(1);
+            toolbarBackground.setAlpha(1);
+        }
     }
 
     public void setBackgroundViewTranslationBasedOnItemTop(int top) {
         if (top < 0)
             top = 0;
         if (top == initialTopValueForBackgroundView) {
+            statusBarView.setAlpha(0);
+            toolbarBackground.setAlpha(0);
             if (!isBackgroundViewAnimating) {
                 backgroundView.animate().translationY(deviceHeight).setDuration(300).setInterpolator(new AccelerateInterpolator()).setListener(new ZAnimatorListener() {
 
@@ -151,6 +209,10 @@ public class ZShopMapsActivity extends ZBaseActivity implements OnMapReadyCallba
         } else {
             float trans = mapValuesFromSet(0, initialTopValueForBackgroundView, 0, deviceHeight, top);
             backgroundView.setTranslationY(trans);
+
+            float alpha = mapValuesFromSet(0, initialTopValueForBackgroundView, 1, 0, top);
+            statusBarView.setAlpha(alpha);
+            toolbarBackground.setAlpha(alpha);
         }
     }
 
@@ -158,10 +220,4 @@ public class ZShopMapsActivity extends ZBaseActivity implements OnMapReadyCallba
         float value = (newMax - newMin) * (valueToChange - oldMin) / (oldMax - oldMin) + newMin;
         return value;
     }
-
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        findViewById(R.id.map).onTouchEvent(ev);
-//        return super.dispatchTouchEvent(ev);
-//    }
 }

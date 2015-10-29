@@ -80,7 +80,6 @@ public class ZShopMapsShopFragment extends ZBaseFragment {
                         ((ZShopMapsActivity) getActivity()).setBackgroundViewTranslationBasedOnItemTop(top);
                     }
                 } else {
-                    Log.w("as", "0 position holder is null");
                     ((ZShopMapsActivity) getActivity()).setBackgroundViewTranslation(0);
                 }
             }
@@ -91,15 +90,6 @@ public class ZShopMapsShopFragment extends ZBaseFragment {
             products.add(new ZShopMapsObject().new MapsShopProductObject());
         adapter = new ZShopMapsShopFragmentListAdapter(getActivity(), products);
         recyclerView.setAdapter(adapter);
-
-//        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                Log.w("as", "ontouch called");
-//                return ((ZShopMapsActivity) getActivity()).findViewById(R.id.map).dispatchTouchEvent(event);
-//
-//            }
-//        });
     }
 
     @Override

@@ -1,4 +1,6 @@
 <com.zimplyshop.app.extras.ZShopMapsActivityFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shopactivitymapscontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/z_white_color">
@@ -15,7 +17,7 @@
         android:id="@+id/backgroundview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/z_grey_shade_2"
+        android:background="@color/z_white_color"
         android:clickable="false" />
 
     <android.support.v4.view.ViewPager
@@ -25,5 +27,40 @@
         android:clickable="false"
         android:clipToPadding="false" />
 
+    <LinearLayout
+        android:id="@+id/linearlayouttoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/viewforstatusbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/PrimaryDarkColor" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/toolbarbackgroundvoew"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/z_margin_top_60"
+                android:background="@drawable/shadow_toolbar_white"
+                android:orientation="vertical" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/z_toolbar_height"
+                android:gravity="center_vertical"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        </FrameLayout>
+    </LinearLayout>
+
 
 </com.zimplyshop.app.extras.ZShopMapsActivityFrameLayout>
+
+
