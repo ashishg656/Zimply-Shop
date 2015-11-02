@@ -220,4 +220,10 @@ public class ZShopMapsActivity extends ZBaseActivity implements OnMapReadyCallba
         float value = (newMax - newMin) * (valueToChange - oldMin) / (oldMax - oldMin) + newMin;
         return value;
     }
+
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        findViewById(R.id.map).onTouchEvent(ev);
+//        return super.dispatchTouchEvent(ev);
+//    }
 }

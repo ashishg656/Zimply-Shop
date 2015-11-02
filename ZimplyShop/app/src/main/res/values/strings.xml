@@ -16,8 +16,7 @@
     </string-array>
 
     <string name="z_buynow_text">Buy Now</string>
-    <string name="z_addtocart_text">Add To Cart</string>
-    <string name="z_gotocart_text">Go To Cart</string>
+    <string name="z_book_text">Book</string>
     <string name="z_wishlist_text">Wishlist</string>
     <string name="title_activity_zshop_maps">Map</string>
 

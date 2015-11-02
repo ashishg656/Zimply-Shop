@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/z_shop_maps_list_header_height"
-    android:layout_marginBottom="@dimen/z_margin_small"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/headerlistshopmapsfragmentlist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/sample_house" />
+        android:layout_height="@dimen/z_shop_maps_list_header_height"
+        android:layout_marginBottom="@dimen/z_margin_small"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/z_shop_maps_shop_fragment_list_header_gradient_bg"
-        android:orientation="vertical"
-        android:padding="@dimen/z_margin_small">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_house" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vishal home decorators"
-            android:textColor="@color/z_white_color"
-            android:textSize="@dimen/z_font_small" />
+            android:layout_gravity="bottom"
+            android:background="@drawable/z_shop_maps_shop_fragment_list_header_gradient_bg"
+            android:orientation="vertical"
+            android:padding="@dimen/z_margin_small">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="5 km"
-            android:textColor="@color/z_white_color"
-            android:textSize="@dimen/z_font_mini" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vishal home decorators"
+                android:textColor="@color/z_white_color"
+                android:textSize="@dimen/z_font_small" />
 
-</FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5 km"
+                android:textColor="@color/z_white_color"
+                android:textSize="@dimen/z_font_mini" />
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

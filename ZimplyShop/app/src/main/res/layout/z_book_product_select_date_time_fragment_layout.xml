@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/z_black_40_alpha"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/z_margin_large"
+        android:layout_marginRight="@dimen/z_margin_large"
+        android:background="@drawable/ic_cart_bg_shadow"
+        android:orientation="vertical"
+        android:padding="@dimen/z_margin_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your product is booked."
+            android:textColor="@color/z_text_color_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/z_margin_mini"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/z_margin_medium"
+                android:text="Visit store on \nto claim it"
+                android:textColor="@color/z_text_color_dark" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/datespinnerprodycbook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/timespinnerprodycbook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:paddingBottom="@dimen/z_margin_small"
+            android:paddingLeft="@dimen/z_margin_large"
+            android:paddingRight="@dimen/z_margin_large"
+            android:paddingTop="@dimen/z_margin_small"
+            android:text="OK"
+            android:textColor="@color/z_blue_color"
+            android:textSize="@dimen/z_font_medium" />
+
+    </LinearLayout>
+
+</FrameLayout>
