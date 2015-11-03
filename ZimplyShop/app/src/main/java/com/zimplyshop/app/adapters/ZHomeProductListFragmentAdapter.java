@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.activities.ZBaseActivity;
-import com.zimplyshop.app.activities.ZHomeActivity;
+import com.zimplyshop.app.fragments.ZHomeFragment;
 import com.zimplyshop.app.activities.ZLoginActivity;
 import com.zimplyshop.app.activities.ZProductDescriptionActivity;
 import com.zimplyshop.app.baseobjects.ZProductListObject;
@@ -107,7 +107,7 @@ public class ZHomeProductListFragmentAdapter extends RecyclerView.Adapter<Recycl
                     } else {
                         i = new Intent(context, ZLoginActivity.class);
                         i.putExtra("wishlist_product_id", mData.get(pos).getId());
-                        ((ZHomeActivity) context).startActivityForResult(i, Z_ADD_TO_WISHLIST_START_ACTIVITY_FOR_RESULT_REQUEST);
+                        ((ZHomeFragment) context).startActivityForResult(i, Z_ADD_TO_WISHLIST_START_ACTIVITY_FOR_RESULT_REQUEST);
                     }
                     break;
                 case R.id.addtocartlayout:
