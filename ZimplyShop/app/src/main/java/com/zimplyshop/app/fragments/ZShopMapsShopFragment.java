@@ -3,6 +3,7 @@ package com.zimplyshop.app.fragments;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class ZShopMapsShopFragment extends ZBaseFragment {
     public RecyclerView recyclerView;
     GridLayoutManager layoutManager;
     ZShopMapsShopFragmentListAdapter adapter;
+    int recyclerViewTopPadding;
 
     public static ZShopMapsShopFragment newInstance(Bundle b) {
         ZShopMapsShopFragment frg = new ZShopMapsShopFragment();
@@ -43,7 +45,7 @@ public class ZShopMapsShopFragment extends ZBaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        int recyclerViewTopPadding = getActivity().getResources().getDisplayMetrics().heightPixels / 2;
+        recyclerViewTopPadding = getActivity().getResources().getDisplayMetrics().heightPixels / 2;
         recyclerView.setPadding(0, recyclerViewTopPadding, 0, 0);
 
         layoutManager = new GridLayoutManager(getActivity(), 2);
@@ -71,6 +73,7 @@ public class ZShopMapsShopFragment extends ZBaseFragment {
                     if (top > 0 && ((ZShopMapsActivity) getActivity()).initialTopValueForBackgroundView == -1) {
                         ((ZShopMapsActivity) getActivity()).initialTopValueForBackgroundView = top;
                     }
+                    Log.w("as", " top  " + top);
                     if (top < 0) {
                         ((ZShopMapsActivity) getActivity()).setBackgroundViewTranslation(0);
                     } else {

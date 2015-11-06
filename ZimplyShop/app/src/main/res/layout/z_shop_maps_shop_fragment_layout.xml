@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:clipToPadding="false"
+        android:paddingTop="@dimen/z_margin_top_108"
         android:scrollbars="none" />
 
 </FrameLayout>

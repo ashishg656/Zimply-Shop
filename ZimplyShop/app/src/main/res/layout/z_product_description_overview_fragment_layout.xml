@@ -316,7 +316,7 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/z_margin_large"
-                android:text="@string/z_book_text"
+                android:text="@string/z_addtocart_text"
                 android:textColor="@color/z_white_color"/>
         </FrameLayout>
 

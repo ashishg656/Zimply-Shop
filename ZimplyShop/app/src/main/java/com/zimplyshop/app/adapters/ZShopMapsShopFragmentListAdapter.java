@@ -65,8 +65,6 @@ public class ZShopMapsShopFragmentListAdapter extends RecyclerView.Adapter<Recyc
             holder.productImage.setLayoutParams(params);
 
             holder.mrp.setPaintFlags(holder.mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        } else if (getItemViewType(position) == Z_SHOP_MAPS_SHOP_FRAGMENT_LIST_HEADER) {
-            ShopMapsShopHeaderHolder holder = (ShopMapsShopHeaderHolder) holderCom;
         }
     }
 
@@ -77,11 +75,8 @@ public class ZShopMapsShopFragmentListAdapter extends RecyclerView.Adapter<Recyc
 
     class ShopMapsShopHeaderHolder extends RecyclerView.ViewHolder {
 
-        FrameLayout containerLayout;
-
         public ShopMapsShopHeaderHolder(View v) {
             super(v);
-            containerLayout = (FrameLayout) v.findViewById(R.id.headerlistshopmapsfragmentlist);
         }
     }
 
