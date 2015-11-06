@@ -1,4 +1,4 @@
-package com.zimplyshop.app.fragments;
+package com.zimplyshop.app.activities;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
@@ -18,11 +18,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -33,8 +31,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.zimplyshop.app.R;
-import com.zimplyshop.app.activities.ZBaseActivity;
-import com.zimplyshop.app.activities.ZShopMapsActivity;
 import com.zimplyshop.app.baseobjects.ZHomeViewPagerTabsObject;
 import com.zimplyshop.app.extras.ZAnimatorListener;
 import com.zimplyshop.app.extras.ZAppConstants;
@@ -49,7 +45,7 @@ import io.codetail.animation.ViewAnimationUtils;
 /**
  * Created by praveen goel on 10/6/2015.
  */
-public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChangeListener, ZAppConstants, View.OnClickListener {
+public class ZHomeActivity extends ZBaseActivity implements ViewPager.OnPageChangeListener, ZAppConstants, View.OnClickListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -69,42 +65,29 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
     int searchAnimDuration = 300;
     FrameLayout searchBarBackButton, searchClearButton;
     EditText searchEditText;
-    Toolbar toolbar;
 
     FloatingActionButton floatingActionButton;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.z_home_activity_layout, container, false);
-
-        navigationView = (NavigationView) v.findViewById(R.id.navigation_view);
-        drawerLayout = (DrawerLayout) v.findViewById(R.id.drawer_layout);
-        viewPager = (ViewPager) v.findViewById(R.id.pager_launch);
-        tabLayout = (TabLayout) v.findViewById(R.id.indicator);
-        appBarLayout = (AppBarLayout) v.findViewById(R.id.appbarlayout);
-        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        searchBarLayout = (LinearLayout) v.findViewById(R.id.searchlayout);
-        searchBarBackButton = (FrameLayout) v.findViewById(R.id.searchbackbutton);
-        searchClearButton = (FrameLayout) v.findViewById(R.id.crossbuttonhome);
-        searchEditText = (EditText) v.findViewById(R.id.searchtexthomeactivity);
-        floatingActionButton = (FloatingActionButton) v.findViewById(R.id.fab_normal);
-
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        fragmentHashMap = new HashMap<>();
-        materialButtonHeight = getResources().getDimensionPixelSize(R.dimen.z_button_height);
-        deviceWidth = getResources().getDisplayMetrics().widthPixels;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.z_home_activity_layout);
+
+        fragmentHashMap = new HashMap<>();
+        materialButtonHeight = getResources().getDimensionPixelSize(R.dimen.z_button_height);
+        deviceWidth = getResources().getDisplayMetrics().widthPixels;
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        viewPager = (ViewPager) findViewById(R.id.pager_launch);
+        tabLayout = (TabLayout) findViewById(R.id.indicator);
+        appBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        searchBarLayout = (LinearLayout) findViewById(R.id.searchlayout);
+        searchBarBackButton = (FrameLayout) findViewById(R.id.searchbackbutton);
+        searchClearButton = (FrameLayout) findViewById(R.id.crossbuttonhome);
+        searchEditText = (EditText) findViewById(R.id.searchtexthomeactivity);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_normal);
 
         searchBarBackButton.setOnClickListener(this);
         searchClearButton.setOnClickListener(this);
@@ -130,11 +113,11 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
             }
         });
 
-        getActivity().setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources()
                 .getColor(R.color.PrimaryColor));
-        getActivity().getSupportActionBar().setTitle("");
-        getActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -152,14 +135,14 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
                     }
                 });
 
-        zHomeViewPagerTabsObject = getActivity().getIntent().getParcelableExtra("tabs_object");
+        zHomeViewPagerTabsObject = getIntent().getParcelableExtra("tabs_object");
 
         setDrawerActionBarToggle();
         setDrawerItemClickListener();
 
         viewPager.addOnPageChangeListener(this);
 
-        pagerAdapter = new ZHomeActivityPagerAdapter(getChildFragmentManager());
+        pagerAdapter = new ZHomeActivityPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -186,7 +169,7 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
 
     private void setDrawerActionBarToggle() {
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
-                getActivity(), drawerLayout, toolbar, R.string.z_open_drawer,
+                this, drawerLayout, toolbar, R.string.z_open_drawer,
                 R.string.z_close_drawer) {
 
             @Override
@@ -229,10 +212,10 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
             searchEditText.setText("");
             searchClearButton.setVisibility(View.INVISIBLE);
         } else if (v.getId() == R.id.fab_normal) {
-            final Intent i = new Intent(getActivity(), ZShopMapsActivity.class);
+            final Intent i = new Intent(this, ZShopMapsActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            ActivitySwitcher.animationOut(v.findViewById(R.id.maincontainerhomeactivity),
-                    getActivity().getWindowManager(),
+            ActivitySwitcher.animationOut(findViewById(R.id.maincontainerhomeactivity),
+                    getWindowManager(),
                     new ActivitySwitcher.AnimationFinishedListener() {
                         @Override
                         public void onAnimationFinished() {
@@ -360,9 +343,9 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
     private void showSearchBarLayout() {
         if (searchButtonCenterY == 0) {
             int loc[] = new int[2];
-            v.findViewById(R.id.action_search).getLocationInWindow(loc);
+            findViewById(R.id.action_search).getLocationInWindow(loc);
             searchButtonCenterY = loc[1];
-            searchButtonCenterX = loc[0] + v.findViewById(R.id.action_search).getWidth() / 2;
+            searchButtonCenterX = loc[0] + findViewById(R.id.action_search).getWidth() / 2;
         }
 
         searchBarLayout.setVisibility(View.VISIBLE);
@@ -370,7 +353,7 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
         searchEditText.setText("");
 
         searchEditText.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
 
         SupportAnimator animator =
@@ -391,7 +374,7 @@ public class ZHomeFragment extends ZBaseFragment implements ViewPager.OnPageChan
         appBarLayout.setVisibility(View.VISIBLE);
 
         searchEditText.clearFocus();
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
 
         SupportAnimator animator =

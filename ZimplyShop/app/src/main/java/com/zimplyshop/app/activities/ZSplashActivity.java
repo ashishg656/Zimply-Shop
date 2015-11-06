@@ -6,7 +6,6 @@ import android.os.Bundle;
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.baseobjects.ZHomeSingleViewPagerObject;
 import com.zimplyshop.app.baseobjects.ZHomeViewPagerTabsObject;
-import com.zimplyshop.app.fragments.ZHomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class ZSplashActivity extends ZBaseActivity {
         }
         obj.setViewPagerItems(items);
 
-        Intent intent = new Intent(this, ZHomeFragment.class);
+        Intent intent = new Intent(this, ZHomeActivity.class);
         intent.putExtra("tabs_object", obj);
         startActivity(intent);
         this.finish();

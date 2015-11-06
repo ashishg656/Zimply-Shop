@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.zimplyshop.app.R;
+import com.zimplyshop.app.activities.ZHomeActivity;
 import com.zimplyshop.app.adapters.ZHomeProductListFragmentAdapter;
 import com.zimplyshop.app.baseobjects.ZProductListObject;
 
@@ -68,17 +69,17 @@ public class ZHomeProductListFragment extends ZBaseFragment implements SwipeRefr
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int pos = layoutManager.findFirstVisibleItemPosition();
                     if (pos == 0) {
-                        ((ZHomeFragment) getActivity()).setToolbarTranslation(recyclerView
+                        ((ZHomeActivity) getActivity()).setToolbarTranslation(recyclerView
                                 .getChildAt(0));
                     } else
-                        ((ZHomeFragment) getActivity()).scrollToolbarAfterTouchEnds();
+                        ((ZHomeActivity) getActivity()).scrollToolbarAfterTouchEnds();
                 }
                 super.onScrollStateChanged(recyclerView, newState);
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                ((ZHomeFragment) getActivity()).scrollToolbarBy(-dy);
+                ((ZHomeActivity) getActivity()).scrollToolbarBy(-dy);
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
