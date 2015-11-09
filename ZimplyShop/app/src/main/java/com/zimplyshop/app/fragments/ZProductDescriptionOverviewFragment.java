@@ -1,6 +1,7 @@
 package com.zimplyshop.app.fragments;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.activities.ZBaseActivity;
 import com.zimplyshop.app.activities.ZProductDescriptionActivity;
@@ -28,11 +30,15 @@ public class ZProductDescriptionOverviewFragment extends ZBaseFragment implement
     ViewPager productImagesViewPager;
     int deviceWidth;
     CirclePageIndicator circlePageIndicator;
-    FrameLayout viewPagerContainerLayout;
+    FrameLayout viewPagerContainerLayout, floatingActionButtonBookContainer;
+    FloatingActionButton floatingActionButtonBook;
     MyPagerAdapter viewPagerAdapter;
     TextView buyNowButton, addToCartButton;
 
     ZProductDescriptionProductOverviewObject productObject;
+    LinearLayout addToCartButtonContainer;
+
+    FloatingActionButtonProgressTask floatingActionButtonProgressTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +49,9 @@ public class ZProductDescriptionOverviewFragment extends ZBaseFragment implement
         viewPagerContainerLayout = (FrameLayout) v.findViewById(R.id.viewpagercontainer);
         buyNowButton = (TextView) v.findViewById(R.id.buynowbuttonproductoverview);
         addToCartButton = (TextView) v.findViewById(R.id.addtocartbuttonproductoverview);
+        floatingActionButtonBookContainer = (FrameLayout) v.findViewById(R.id.fabproductovercviewlayout);
+        floatingActionButtonBook = (FloatingActionButton) v.findViewById(R.id.fabproductovercview);
+        addToCartButtonContainer = (LinearLayout) v.findViewById(R.id.addtocartbuttonproductoverviewcontainer);
 
         return v;
     }
@@ -55,6 +64,8 @@ public class ZProductDescriptionOverviewFragment extends ZBaseFragment implement
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewPagerContainerLayout.getLayoutParams();
         params.height = deviceWidth;
         viewPagerContainerLayout.setLayoutParams(params);
+
+        floatingActionButtonBook.setOnClickListener(this);
 
         productObject = new ZProductDescriptionProductOverviewObject();
         List<String> image = new ArrayList<>();
@@ -79,11 +90,68 @@ public class ZProductDescriptionOverviewFragment extends ZBaseFragment implement
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addtocartbuttonproductoverview:
-                showDialogForBookingDateTimeSelection();
+                showFloatingActionButtonWithCancelButton();
                 break;
             case R.id.buynowbuttonproductoverview:
                 ((ZBaseActivity) getActivity()).openCartActivity();
                 break;
+            case R.id.fabproductovercview:
+                if (floatingActionButtonProgressTask != null)
+                    floatingActionButtonProgressTask.cancel(true);
+                break;
+        }
+    }
+
+    private void showFloatingActionButtonWithCancelButton() {
+        floatingActionButtonProgressTask = new FloatingActionButtonProgressTask();
+        floatingActionButtonProgressTask.execute();
+    }
+
+    class FloatingActionButtonProgressTask extends AsyncTask<Integer, Integer, Integer> {
+
+        int progress = 0;
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            addToCartButtonContainer.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = 0;
+            floatingActionButtonBook.setProgress(0, false);
+            addToCartButtonContainer.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            addToCartButtonContainer.setVisibility(View.VISIBLE);
+            showDialogForBookingDateTimeSelection();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            floatingActionButtonBook.setProgress(values[0], false);
+            floatingActionButtonBook.invalidate();
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+            while (progress <= 100) {
+                if (isCancelled())
+                    break;
+                progress++;
+                publishProgress(progress);
+                try {
+                    Thread.sleep(40);
+                } catch (InterruptedException e) {
+                }
+            }
+            return null;
         }
     }
 

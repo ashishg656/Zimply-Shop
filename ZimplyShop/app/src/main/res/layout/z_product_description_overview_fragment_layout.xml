@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -297,42 +298,79 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/z_toolbar_height"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/z_addtocart_button_bg">
 
-            <TextView
-                android:id="@+id/addtocartbuttonproductoverview"
+            <FrameLayout
+                android:id="@+id/fabproductovercviewlayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:gravity="center"
-                android:padding="@dimen/z_margin_large"
-                android:text="@string/z_book_text"
-                android:textColor="@color/z_white_color" />
+                android:layout_height="match_parent"
+                android:background="@color/z_addtocart_button_bg"
+                android:clickable="true">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fabproductovercview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_cross_button_small"
+                    app:fab_colorNormal="@color/PrimaryColor"
+                    app:fab_colorPressed="@color/PrimaryDarkColor"
+                    app:fab_colorRipple="#99FFFFFF"
+                    app:fab_progress="0"
+                    app:fab_progress_backgroundColor="#00000000"
+                    app:fab_progress_color="@color/z_grey_shade_5"
+                    app:fab_progress_indeterminate="false"
+                    app:fab_progress_max="100"
+                    app:fab_progress_showBackground="true"
+                    app:fab_showShadow="false"
+                    app:fab_size="mini" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/addtocartbuttonproductoverviewcontainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/z_addtocart_button_bg"
+                android:clickable="true">
+
+                <TextView
+                    android:id="@+id/addtocartbuttonproductoverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/z_margin_large"
+                    android:paddingRight="@dimen/z_margin_large"
+                    android:text="@string/z_book_text"
+                    android:textColor="@color/z_white_color" />
+            </LinearLayout>
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/z_buynow_button_bg">
 
             <TextView
                 android:id="@+id/buynowbuttonproductoverview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center"
-                android:padding="@dimen/z_margin_large"
+                android:paddingLeft="@dimen/z_margin_large"
+                android:paddingRight="@dimen/z_margin_large"
                 android:text="Buy Now"
                 android:textColor="@color/z_white_color" />
         </FrameLayout>
