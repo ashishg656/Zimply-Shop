@@ -21,4 +21,6 @@
     <string name="z_wishlist_text">Wishlist</string>
     <string name="title_activity_zshop_maps">Map</string>
 
+    <string name="z_book_text">Book</string>
+
 </resources>

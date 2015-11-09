@@ -22,7 +22,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.extras.ZAnimatorListener;
 import com.zimplyshop.app.fragments.ZShopMapsShopFragment;
-import com.zimplyshop.app.widgets.ActivitySwitcher;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,8 +107,8 @@ public class ZShopMapsActivity extends ZBaseActivity implements OnMapReadyCallba
 
     @Override
     protected void onResume() {
-        ActivitySwitcher.animationIn(findViewById(R.id.shopactivitymapscontainer),
-                getWindowManager());
+//        ActivitySwitcher.animationIn(findViewById(R.id.shopactivitymapscontainer),
+//                getWindowManager());
         super.onResume();
         setUpMapIfNeeded();
     }

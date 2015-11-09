@@ -3,12 +3,12 @@ package com.zimplyshop.app.widgets;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 
 public class ActivitySwitcher {
 
-    private final static int DURATION = 300;
+    private final static int DURATION = 400;
     private final static float DEPTH = 400.0f;
 
     /* ----------------------------------------------- */
@@ -54,7 +54,7 @@ public class ActivitySwitcher {
         a.reset();
         a.setDuration(DURATION);
         a.setFillAfter(true);
-        a.setInterpolator(new AccelerateInterpolator());
+        a.setInterpolator(new LinearInterpolator());
         if (listener != null) {
             a.setAnimationListener(new Animation.AnimationListener() {
                 @Override

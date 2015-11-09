@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.activities.ZBaseActivity;
+import com.zimplyshop.app.activities.ZProductDescriptionActivity;
 import com.zimplyshop.app.baseobjects.ZProductDescriptionProductOverviewObject;
 import com.zimplyshop.app.widgets.CirclePageIndicator;
 
@@ -65,9 +66,9 @@ public class ZProductDescriptionOverviewFragment extends ZBaseFragment implement
 
         viewPagerAdapter = new MyPagerAdapter(getActivity());
         productImagesViewPager.setAdapter(viewPagerAdapter);
-        circlePageIndicator.setPageColor(getResources().getColor(R.color.z_text_color_light));
+        circlePageIndicator.setPageColor(getActivity().getResources().getColor(R.color.z_text_color_light));
         circlePageIndicator.setStrokeWidth(0);
-        circlePageIndicator.setFillColor(getResources().getColor(R.color.z_blue_color));
+        circlePageIndicator.setFillColor(getActivity().getResources().getColor(R.color.z_blue_color));
         circlePageIndicator.setViewPager(productImagesViewPager);
 
         addToCartButton.setOnClickListener(this);
@@ -78,16 +79,16 @@ public class ZProductDescriptionOverviewFragment extends ZBaseFragment implement
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addtocartbuttonproductoverview:
-                if (addToCartButton.getText().toString().equals(getActivity().getResources().getString(R.string.z_addtocart_text))) {
-                    addToCartButton.setText(getActivity().getResources().getString(R.string.z_gotocart_text));
-                } else {
-                    ((ZBaseActivity) getActivity()).openCartActivity();
-                }
+                showDialogForBookingDateTimeSelection();
                 break;
             case R.id.buynowbuttonproductoverview:
                 ((ZBaseActivity) getActivity()).openCartActivity();
                 break;
         }
+    }
+
+    private void showDialogForBookingDateTimeSelection() {
+        ((ZProductDescriptionActivity) getActivity()).showFragmentForSelectingDateTimeForProductBooking();
     }
 
     class MyPagerAdapter extends PagerAdapter {

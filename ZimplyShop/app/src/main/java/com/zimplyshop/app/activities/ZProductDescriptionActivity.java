@@ -16,6 +16,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.zimplyshop.app.R;
 import com.zimplyshop.app.extras.ZAnimatorListener;
+import com.zimplyshop.app.fragments.ZBookProductSelectDateTimeFragment;
 import com.zimplyshop.app.fragments.ZProductDescriptionOverviewFragment;
 import com.zimplyshop.app.fragments.ZProductDescriptionProductRatingFragment;
 import com.zimplyshop.app.fragments.ZProductDescriptionStoreRatingFragment;
@@ -183,5 +184,10 @@ public class ZProductDescriptionActivity extends ZBaseActivity implements ViewPa
         public CharSequence getPageTitle(int position) {
             return names[position];
         }
+    }
+
+    public void showFragmentForSelectingDateTimeForProductBooking() {
+        Bundle bundle = new Bundle();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmenthodlerproductdesc, ZBookProductSelectDateTimeFragment.newInstance(bundle)).addToBackStack("TAG").commit();
     }
 }
